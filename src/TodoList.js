@@ -1,31 +1,10 @@
-import DeleteTodo from "./DeleteTodo";
+import React from "react";
+import Todo from "./Todo";
 
-export default function TodoList({todos, setTodos}) {
-    function handleToggleTodo(todo) {
-        const updatedTodos = todos.map((e) => 
-            e.id === todo.id ? {
-                ...e,
-                done: !e.done,
-            } : e
-        );
-        setTodos(updatedTodos);
-    }
-
-    if(todos.length === 0) {
-        return <p>No Todos!</p>
-    }
-    
+export default function TodoList({ todos, toggleTodo }) {
     return (
-     <ul>
-         {todos.map(todo => 
-            <li key={todo.id} 
-                style={{textDecoration: todo.done ? 'line-through' : null}}
-                onDoubleClick={() => handleToggleTodo(todo)}
-            >
-                {todo.text}
-                <DeleteTodo todo={todo} setTodos={setTodos} />
-            </li>
-         )}
-     </ul>
-    );
+        todos.map(todo => {
+            return <Todo key={todo.id} todo={todo} toggleTodo={toggleTodo} />
+        })
+    )
 }
